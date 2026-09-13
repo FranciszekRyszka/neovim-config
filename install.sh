@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 # Bootstrap Neovima + konfiguracji na Ubuntu 24.04
-# Użycie: curl -fsSL https://raw.githubusercontent.com/USER/nvim-config/main/install.sh | bash
 set -euo pipefail
 
-REPO="https://github.com/USER/nvim-config.git"
 CONFIG_DIR="$HOME/.config/nvim"
 
 # Zależności: gcc dla parserów Treesitter, npm dla bashls/yamlls/pyright, unzip dla Masona
@@ -22,7 +20,6 @@ if [ -d "$CONFIG_DIR/.git" ]; then
   git -C "$CONFIG_DIR" pull --ff-only
 else
   [ -d "$CONFIG_DIR" ] && mv "$CONFIG_DIR" "$CONFIG_DIR.bak.$(date +%s)"
-  git clone "$REPO" "$CONFIG_DIR"
 fi
 
 # Instalacja wtyczek zgodnie z lazy-lock.json bez otwierania edytora
