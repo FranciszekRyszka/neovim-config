@@ -15,7 +15,7 @@ Skrypt sam instaluje: Neovim 0.12 (snap), `git`, `curl`, `unzip`, `build-essenti
 Na nowym serwerze:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/FranciszekRyszka/nvim-config/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/FranciszekRyszka/neovim-config/refs/heads/main/install.sh | bash
 ```
 
 Skrypt sklonuje repo do `~/.config/nvim` (istniejąca konfiguracja trafia do `~/.config/nvim.bak.<timestamp>`) i zainstaluje wtyczki w wersjach z `lazy-lock.json`. Serwery LSP dociągnie Mason przy pierwszym uruchomieniu `nvim` — postęp widać w `:Mason`.
