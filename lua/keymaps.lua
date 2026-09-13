@@ -89,3 +89,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('n', '<leader>la', vim.lsp.buf.code_action, 'Akcja kodu')
   end,
 })
+
+-- 'i' na ostatnim znaku linii wstawia za nim (jak 'a')
+keymap('n', 'i', function()
+  return vim.fn.col('.') == vim.fn.col('$') - 1 and 'a' or 'i'
+end, { expr = true, desc = 'Insert (na końcu linii: append)' })
