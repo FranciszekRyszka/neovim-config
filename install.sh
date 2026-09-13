@@ -4,7 +4,8 @@ set -euo pipefail
 
 REPO="https://github.com/FranciszekRyszka/neovim-config.git"
 CONFIG_DIR="$HOME/.config/nvim"
-
+BASHRC="$HOME/.bashrc"
+ 
 # Zależności: gcc dla parserów Treesitter, unzip dla Masona, ripgrep dla Telescope live_grep
 sudo apt-get update -qq
 sudo apt-get install -y -qq git curl unzip build-essential ripgrep
@@ -17,19 +18,21 @@ if ! command -v nvim >/dev/null || ! nvim --version | grep -qE 'v0\.(1[1-9]|[2-9
   sudo apt-get remove -y -qq neovim || true
   sudo snap install nvim --classic
 fi
-
+ 
+# Pozostałości po instalacji z tarballa (jeśli były)
+sed -i '\#/opt/nvim-linux#d' "$BASHRC"
+sudo rm -rf /opt/nvim-linux-*
+ 
 # Wpisy w .bashrc – usuń stare (po znaczniku), dodaj aktualne
-BASHRC="$HOME/.bashrc"
 sed -i '/# nvim-config$/d' "$BASHRC"
-cat >> "$BASHRC" <<'EOF'
+cat >> "$BASHRC" <<'BRC'
 
-# Neovim config
-export EDITOR=nvim # nvim-config
-export SUDO_EDITOR=nvim # nvim-config
-alias vi=nvim # nvim-config
-EOF
-source "$BASHRC"
-
+# Neovim config 
+export EDITOR=nvim
+export SUDO_EDITOR=nvim
+alias vi=nvim # vi as alias for neovim
+BRC
+ 
 # Konfiguracja
 if [ -d "$CONFIG_DIR/.git" ]; then
   git -C "$CONFIG_DIR" pull --ff-only
@@ -42,3 +45,4 @@ fi
 nvim --headless "+Lazy! restore" +qa
  
 echo "Gotowe: $(nvim --version | head -1)"
+echo "Przeładuj powłokę: source ~/.bashrc"
