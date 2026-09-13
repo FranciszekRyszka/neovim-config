@@ -17,7 +17,17 @@ if ! command -v nvim >/dev/null || ! nvim --version | grep -qE 'v0\.(1[1-9]|[2-9
   sudo apt-get remove -y -qq neovim || true
   sudo snap install nvim --classic
 fi
- 
+
+# Wpisy w .bashrc – usuń stare (po znaczniku), dodaj aktualne
+BASHRC="$HOME/.bashrc"
+sed -i '/# nvim-config$/d' "$BASHRC"
+cat >> "$BASHRC" <<'EOF'
+export EDITOR=nvim # nvim-config
+export SUDO_EDITOR=nvim # nvim-config
+alias vi=nvim # nvim-config
+EOF
+source "$BASHRC"
+
 # Konfiguracja
 if [ -d "$CONFIG_DIR/.git" ]; then
   git -C "$CONFIG_DIR" pull --ff-only
