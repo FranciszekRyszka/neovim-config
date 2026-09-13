@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # Bootstrap Neovima + konfiguracji na Ubuntu 24.04
-# Użycie: curl -fsSL https://raw.githubusercontent.com/USER/nvim-config/main/install.sh | bash
 set -euo pipefail
 
 REPO="https://github.com/FranciszekRyszka/neovim-config.git"
