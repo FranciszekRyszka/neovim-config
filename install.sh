@@ -22,6 +22,8 @@ fi
 BASHRC="$HOME/.bashrc"
 sed -i '/# nvim-config$/d' "$BASHRC"
 cat >> "$BASHRC" <<'EOF'
+
+# Neovim config
 export EDITOR=nvim # nvim-config
 export SUDO_EDITOR=nvim # nvim-config
 alias vi=nvim # nvim-config
